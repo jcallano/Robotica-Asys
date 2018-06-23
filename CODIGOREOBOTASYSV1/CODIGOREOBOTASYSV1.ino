@@ -3,7 +3,7 @@
 
 #define NUM_SENSORS             8  // number of sensors used
 #define NUM_SAMPLES_PER_SENSOR  4  // average 4 analog samples per sensor reading
-#define EMITTER_PIN             12  // emitter is controlled by digital pin 2
+#define EMITTER_PIN             3  // emitter is controlled by digital pin 2
 
 #define pwma 6
 #define ain2 7
@@ -26,7 +26,7 @@ void setup() {
   delay(500);
   pinMode(13, OUTPUT);
   digitalWrite(13, HIGH);    // turn on Arduino's LED to indicate we are in calibration mode
-  for (int i = 0; i < 400; i++)  // make the calibration take about 10 seconds
+  for (int i = 0; i < 100; i++)  // make the calibration take about 10 seconds
   {
     qtra.calibrate();       // reads all sensors 10 times at 2.5 ms per six sensors (i.e. ~25 ms per call)
   }
@@ -114,6 +114,10 @@ unsigned int position = qtra.readLine(sensorValues);
   {
     Serial.print(sensorValues[i]);
     Serial.print('\t');
+    
   }
 
+  Serial.print("->    ");
+  Serial.println(position);
+  
 }
